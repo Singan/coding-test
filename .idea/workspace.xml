@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f90259e7-3c36-4343-a3ab-c947be936aff" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="f90259e7-3c36-4343-a3ab-c947be936aff" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,7 +36,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/codingtest" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -82,13 +80,13 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ZooClass">
-    <configuration name="OneDay" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="stu.OneDay" />
+  <component name="RunManager" selected="Application.Q3">
+    <configuration name="Q3" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="toss.Q3" />
       <module name="coding_test.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="stu.*" />
+          <option name="PATTERN" value="toss.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -172,11 +170,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Q3" />
         <item itemvalue="Application.ZooClass" />
         <item itemvalue="Application.ViewClass" />
         <item itemvalue="Application.ThreeDay" />
         <item itemvalue="Application.TwoDay" />
-        <item itemvalue="Application.OneDay" />
       </list>
     </recent_temporary>
   </component>
@@ -211,7 +209,7 @@
       <workItem from="1684417405912" duration="8000" />
       <workItem from="1684493444001" duration="1088000" />
       <workItem from="1684494704818" duration="661000" />
-      <workItem from="1698428989875" duration="674000" />
+      <workItem from="1698428989875" duration="2908000" />
     </task>
     <servers />
   </component>
@@ -226,6 +224,11 @@
           <line>7</line>
           <properties field="money" class="test.Changer" />
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/toss/Q3.java</url>
+          <line>4</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
