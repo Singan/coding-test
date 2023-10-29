@@ -1,4 +1,4 @@
-package basic1;
+package backjun.basic1;
 
 import java.io.*;
 import java.util.StringTokenizer;
