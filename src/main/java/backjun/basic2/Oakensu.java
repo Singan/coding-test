@@ -33,10 +33,7 @@ public class Oakensu {
         Stack<Integer> stack = new Stack<>();
         int[] result = new int[count];
         for (int i = 0;i<count;i++){
-            // 3 5 2 7
-            // 스택 숫자 1, i = 2
             while (!stack.isEmpty() && numberArr[stack.peek()]<numberArr[i]){
-                System.out.println(i);
                 result[stack.pop()] = numberArr[i];
             }
             stack.push(i);
@@ -45,11 +42,27 @@ public class Oakensu {
             result[stack.pop()] = -1;
         }
         for (int i = 0; i < count; i++) {
-            bw.write(result[i]+"");
-            if (i < count - 1) {
-                bw.write(" ");
-            }
+            bw.write(result[i]+ (count-1==i?"":" "));
         }
+
         bw.flush();
     }
 }
+
+//3 5 2 7
+//
+//0을 담는다
+//
+//3과 5 비교
+//5를 결과값에 담음
+//1을 담는다
+//2를 담는다.
+//2와 7 을 비교
+//7을 결과 값에 담는다
+//
+//다시 한번 픽을한다
+//5와 7을 비교한다
+//7을 담는다
+//3을 담는다
+// 스택에는 3만이 담겨있는데 이 자리에 -1을 채우도록 한다.
+//5 7 7
