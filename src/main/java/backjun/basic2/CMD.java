@@ -15,17 +15,22 @@ public class CMD {
     //이 문제는 검색 결과가 먼저 주어졌을 때, 패턴으로 뭘 쳐야 그 결과가 나오는지를 출력하는 문제이다. 패턴에는 알파벳과 "." 그리고 "?"만 넣을 수 있다.
     // 가능하면 ?을 적게 써야 한다. 그 디렉토리에는 검색 결과에 나온 파일만 있다고 가정하고, 파일 이름의 길이는 모두 같다.
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bf = new BufferedWriter(new OutputStreamWriter(System.out));
         int count = Integer.parseInt(br.readLine());
-        char[][] chars = new char[count][];
-        for (int i=0;i<count;i++){
+        char[] chars = br.readLine().toCharArray();
+        for (int i = 1; i < count; i++) {
             char[] ch = br.readLine().toCharArray();
-            chars[i] = ch;
+            for (int j = 0; j < chars.length; j++) {
+                if(chars[j]=='?')
+                    continue;
+                if (chars[j] != ch[j]) {
+                    chars[j] = '?';
+                }
+            }
         }
-        for (int i=0;i<chars.length;i++){
-            
-        }
+        bf.write(chars);
+        bf.flush();
     }
 }
