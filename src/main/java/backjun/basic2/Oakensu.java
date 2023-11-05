@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Arrays;
 import java.util.Stack;
 
 public class Oakensu {
@@ -21,14 +22,8 @@ public class Oakensu {
     //총 N개의 수 NGE(1), NGE(2), ..., NGE(N)을 공백으로 구분해 출력한다.
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int count = Integer.parseInt(br.readLine());
-        String[] stringSplit = br.readLine().split(" ");
-        int[] numberArr = new int[count];
-
-        for (int i = 0; i < count; i++) {
-            numberArr[i] = Integer.parseInt(stringSplit[i]);
-        }
+        int[] numberArr = Arrays.stream(br.readLine().split(" ")).mapToInt(value -> Integer.parseInt(value)).toArray();
 
         Stack<Integer> stack = new Stack<>();
         int[] result = new int[count];
@@ -42,10 +37,10 @@ public class Oakensu {
             result[stack.pop()] = -1;
         }
         for (int i = 0; i < count; i++) {
-            bw.write(result[i]+ (count-1==i?"":" "));
+//            bw.write(result[i]+ (count-1==i?"":" "));
         }
 
-        bw.flush();
+
     }
 }
 
