@@ -2,6 +2,7 @@ package backjun.greedy;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class 행렬 {
@@ -11,12 +12,13 @@ public class 행렬 {
 
     static int[][] a;
     static int[][] b;
-    static int row = sc.nextInt();
-    static int column = sc.nextInt();
+    static int row;
+    static int column;
 
     public static void main(String[] args) throws Exception {
 
-
+        row = sc.nextInt();
+        column = sc.nextInt();
         a = new int[row][column];
         b = new int[row][column];
         sc.nextLine();
@@ -43,24 +45,21 @@ public class 행렬 {
                 }
             }
         }
-        System.out.println(result < 1 ? -1 : result);
+        if (Arrays.deepEquals(a, b)) {
+            System.out.println(result);
+        }else{
+            System.out.println(-1);
+        }
     }
 
-    static boolean reverse(int row, int column) {
-        if (a.length < row + 3 && a[0].length < column + 3)
+    static boolean reverse(int rowStart, int columnStart) {
+        if (row < rowStart + 3 || column < columnStart + 3)
             return false;
-        for (int i = row; i < row + 3; i++) {
-            for (int j = column; j < column + 3; j++) {
+        for (int i = rowStart; i < rowStart + 3; i++) {
+            for (int j = columnStart; j < columnStart + 3; j++) {
                 a[i][j] = 1 - a[i][j];
             }
         }
         return true;
     }
 }
-//3 42
-//011001011111111100101000111111001010010111
-//111111011001011001001011000111011110111011
-//100101110101010111110100001001100110111110
-//011001010110000110010000111001100111000110
-//010010001100100111100010101000101101010100
-//101111100111000010111000110011001111100011
