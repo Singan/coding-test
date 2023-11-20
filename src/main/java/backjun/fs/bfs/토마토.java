@@ -1,5 +1,7 @@
 package backjun.fs.bfs;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class 토마토 {
@@ -10,10 +12,51 @@ public class 토마토 {
     // 정수 0은 익지 않은 토마토, 정수 -1은 토마토가 들어있지 않은 칸을 나타낸다.
     //
     //토마토가 하나 이상 있는 경우만 입력으로 주어진다.
+    //    6 4
+    //    0 0 0 0 0 0
+    //    0 0 0 0 0 0
+    //    0 0 0 0 0 0
+    //    0 0 0 0 0 1
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int m = sc.nextInt();
         int n = sc.nextInt();
         sc.nextLine();
+        int answer = -1;
+        int[][] move = new int[][]{{0,1},{0,-1},{1,0},{-1,0}};
+        int[][] tomato = new int[n][m];
+        boolean chk = true;
+        Queue<int[]> queue = new LinkedList<>();
+        for (int i = 0 ; i < n;i++){
+            for (int j = 0 ; j < m;j++){
+                int to = sc.nextInt();
+                tomato[i][j] = to;
+                if(to==1){
+                    queue.offer(new int[]{i,j,1});
+                }
+            }
+            sc.nextLine();
+        }
+        while (!queue.isEmpty()){
+            int[] cur = queue.poll();
+            for (int[] mo:move) {
+                int x = cur[0] + mo[0];
+                int y = cur[1] + mo[1];
+                if(x>=0&&y>=0 && x< tomato.length&&y<tomato[0].length&&tomato[x][y]==0){
+                    queue.offer(new int[]{ x,y, cur[2]+ 1 });
+                    tomato[x][y] = cur[2]+ 1;
+                }
+            }
+            answer = cur[2];
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (tomato[i][j] == 0)
+                    chk  = false;
+            }
+        }
+        System.out.println(chk?answer-1:-1);
     }
+
 }
