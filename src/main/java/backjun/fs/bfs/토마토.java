@@ -1,5 +1,7 @@
 package backjun.fs.bfs;
 
+import java.util.Scanner;
+
 public class 토마토 {
     //첫 줄에는 상자의 크기를 나타내는 두 정수 M,N이 주어진다. M은 상자의 가로 칸의 수, N은 상자의 세로 칸의 수를 나타낸다.
     // 단, 2 ≤ M,N ≤ 1,000 이다. 둘째 줄부터는 하나의 상자에 저장된 토마토들의 정보가 주어진다.
@@ -9,6 +11,9 @@ public class 토마토 {
     //
     //토마토가 하나 이상 있는 경우만 입력으로 주어진다.
     public static void main(String[] args) {
-
+        Scanner sc = new Scanner(System.in);
+        int m = sc.nextInt();
+        int n = sc.nextInt();
+        sc.nextLine();
     }
 }
