@@ -24,7 +24,7 @@ public class 거짓말 {
         boolean[] know = new boolean[n];
         str = br.readLine().split(" ");
         for (int i = 0; i < Integer.parseInt(str[0]); i++) {
-            
+
         }
 
 

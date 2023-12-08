@@ -1,45 +1,110 @@
 package backjun.fs.bfs;
 
 import java.io.*;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class MooTube {
+    private static class UnionFind {
+        int[] id, sz;
+        UnionFind(int n) {
+            id = new int[n];
+            sz = new int[n];
+            for (int i = 0; i < n; i++) {
+                id[i] = i;
+                sz[i] = 1;
+            }
+        }
+
+        int root(int x) {
+            while (x != id[x]) {
+                x = id[x] = id[id[x]];
+            }
+            return x;
+        }
+
+        void union(int p, int q) {
+            int prt = root(p);
+            int qrt = root(q);
+            if (prt == qrt) return;
+            if (sz[prt] < sz[qrt]) {
+                sz[qrt] += sz[prt];
+                id[prt] = qrt;
+            } else {
+                sz[prt] += sz[qrt];
+                id[qrt] = prt;
+            }
+        }
+        int getNumberGroupMember(int x) {
+            return sz[root(x)];
+        }
+    }
+
+    private static class Edge {
+        int start, end, weight;
+        Edge(int start, int end, int weight) {
+            this.start = start;
+            this.end = end;
+            this.weight = weight;
+        }
+        @Override
+        public String toString() {
+            return "start=" + start + ", end=" + end + ", weight=" + weight;
+        }
+    }
+    private static class Query {
+        int idx, limit, video;
+        Query(int idx, int limit, int video) {
+            this.idx = idx;
+            this.limit = limit;
+            this.video = video;
+        }
+    }
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        String[] firstLineSplit = br.readLine().split(" ");
-        int movieCount = Integer.parseInt(firstLineSplit[0]);
-        int question = Integer.parseInt(firstLineSplit[1]);
-        int movie[][] = new int[movieCount][movieCount];
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int q = Integer.parseInt(st.nextToken());
 
-        for (int i =0;i<movieCount-1;i++){
-            String[] movieRelation = br.readLine().split(" ");
-            int movieOne = Integer.parseInt(movieRelation[0])-1;
-            int movieTwo = Integer.parseInt(movieRelation[1])-1;
-            int osando = Integer.parseInt(movieRelation[2]);
-            movie[movieOne][movieTwo] = osando;
-            movie[movieTwo][movieOne] = osando;
+        List<Edge> edges = new ArrayList<>();
+        for (int i = 1; i < n; i++) {
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            int w = Integer.parseInt(st.nextToken());
+            edges.add(new Edge(a, b, w));
         }
-        for (int i = 0;i<question;i++){
-            String[] questionLine = br.readLine().split(" ");
-            int questionMovie = Integer.parseInt(questionLine[1])-1;
-            int questionOsando = Integer.parseInt(questionLine[0]);
-            int count = 0;
-            Queue<Integer> queue = new LinkedList<>();
-            queue.offer(questionMovie);
-            boolean[] chk = new boolean[movieCount];
-            while (!queue.isEmpty()){
-                int poll = queue.poll();
-                chk[poll] = true;
-                for (int j = 0; j < movie[poll].length; j++) {
-                    if(movie[poll][j]>=questionOsando && !chk[j] ){
-                        queue.offer(j);
-                        count++;
-                    }
+        Collections.sort(edges, (a, b) -> b.weight-a.weight);
+
+        List<Query> queries = new ArrayList<>();
+        for (int i = 0; i < q; i++) {
+            st = new StringTokenizer(br.readLine());
+            int k = Integer.parseInt(st.nextToken());
+            int v = Integer.parseInt(st.nextToken());
+            queries.add(new Query(i, k, v));
+        }
+        Collections.sort(queries, (a, b) -> b.limit-a.limit);
+
+        int[] answer = new int[q];
+
+        int edgePtr = 0;
+        UnionFind uf = new UnionFind(n+1);
+        for (Query query : queries) {
+            while (edgePtr < edges.size()) {
+                Edge edge = edges.get(edgePtr);
+                if (edge.weight >= query.limit) {
+                    uf.union(edge.start, edge.end);
+                    edgePtr++;
+                } else {
+                    break;
                 }
             }
-            bw.write(count + "\n");
+            answer[query.idx] = uf.getNumberGroupMember(query.video)-1;
+        }
+
+        for (int a : answer) {
+            bw.write(Integer.toString(a));
+            bw.newLine();
         }
         bw.flush();
     }
