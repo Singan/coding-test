@@ -1,6 +1,7 @@
 package programers;
 
-import java.util.Arrays;
+import java.util.*;
+import java.util.stream.IntStream;
 
 public class 비밀지도 {
     public static void main(String[] args) {
@@ -12,35 +13,27 @@ public class 비밀지도 {
     }
 
     private static class Solution {
+
         public String[] solution(int n, int[] arr1, int[] arr2) {
-            String[] answer = new String[n];
-            StringBuilder stringBuilder;
-            for (int i = 0; i < n; i++) {
-                int value1 = arr1[i];
-                int value2 = arr2[i];
-                int result = value1 | value2;
-                stringBuilder = new StringBuilder();
-                String binaryString = Integer.toBinaryString(result);
-                System.out.println(binaryString);
-                for(int j = n-binaryString.length();j>0;j--){
-                    stringBuilder.append(" ");
-                }
-                for (int j = 0; j <binaryString.length(); j++) {
-                    if (binaryString.charAt(j)=='1') {
-                        stringBuilder.append("#");
-                    } else {
-                        stringBuilder.append(" ");
-                    }
-                }
-                answer[i] = stringBuilder.toString();
-            }
-
-
-            return answer;
+            return IntStream.range(0, n)
+                    .mapToObj(i -> Integer.toBinaryString(arr1[i] | arr2[i]))
+                    .map(s -> {
+                        StringBuilder stringBuilder = new StringBuilder();
+                        for(int j = n-s.length();j>0;j--){
+                            stringBuilder.append(" ");
+                        }
+                        for (int j = 0; j <s.length(); j++) {
+                            if (s.charAt(j)=='1') {
+                                stringBuilder.append("#");
+                            } else {
+                                stringBuilder.append(" ");
+                            }
+                        }
+                        return stringBuilder.toString();
+                    })
+                    .map(s -> s.replaceAll("1", "#").replaceAll("0", " "))
+                    .toArray(String[]::new);
         }
-    }
-
-    public void convertBinary() {
 
     }
 }
