@@ -23,11 +23,13 @@ public class 숨바꼭질3 {
 
         int end = Integer.parseInt(st.nextToken());
         int[] countTime = new int[100001];
-
+        if(start>=end){
+            System.out.println(start-end);
+            return;
+        }
         for (int i = 0; i < countTime.length; i++) {
             countTime[i] = Integer.MAX_VALUE;
         }
-
         //bfs
         Queue<Integer> queue = new LinkedList<>();
         queue.offer(start);
