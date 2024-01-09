@@ -29,30 +29,13 @@ public class 인구이동 {
         }
 
         int day = 0;
-        int move[][] = {{1, 0}, {0, 1}};
         while (true) {
             boolean flag = false;
             boolean visit[][] = new boolean[n][n];
-
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
-//                    int curPopulation = arr[i][j];
-//                    for (int[] m : move) {
-//                        int y = m[0] + i;
-//                        int x = m[1] + j;
-//
-//                        if (x < visit.length && x >= 0 && y < visit.length && y >= 0 && !visit[x][y]) {
-//                            int population = arr[x][y];
-//                            int diff = Math.abs(curPopulation - population);
-//                            boolean chk = L <= diff && diff <= R;
-//
-//                            if (chk) {
-//                                bfs(new int[]{i, j}, arr, visit, L, R);
-//                                flag = true;
-//                            }
-//                        }
                     if (!visit[i][j]) {
-                        flag = flag|bfs(new int[]{i, j}, arr, visit, L, R);
+                        flag = bfs(new int[]{i, j}, arr, visit, L, R) ? true : flag;
                     }
                 }
             }
@@ -61,9 +44,9 @@ public class 인구이동 {
             } else {
                 day++;
             }
-
         }
         System.out.println(day);
+
     }
 
     public static boolean bfs(int[] start, int[][] arr, boolean visit[][], int l, int r) {
@@ -83,7 +66,6 @@ public class 인구이동 {
             for (int[] m : move) {
                 int x = cur[0] + m[0];
                 int y = cur[1] + m[1];
-
                 if (x < visit.length && x >= 0 && y < visit.length && y >= 0 && !visit[x][y]) {
                     int population = arr[x][y];
                     int diff = Math.abs(curPopulation - population);
@@ -96,13 +78,13 @@ public class 인구이동 {
             }
         }
         int result = sum / count;
-        boolean chk =!reQueue.isEmpty();
+        boolean chk =  reQueue.size() - 1 == 0 ;
         while (!reQueue.isEmpty()) {
             int[] cur = reQueue.poll();
             int x = cur[0];
             int y = cur[1];
             arr[x][y] = result;
         }
-        return chk;
+        return !chk;
     }
 }
