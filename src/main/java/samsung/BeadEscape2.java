@@ -12,4 +12,17 @@ public class BeadEscape2 {
     //빨간 구슬과 파란 구슬이 동시에 구멍에 빠져도 실패이다. 빨간 구슬과 파란 구슬은 동시에 같은 칸에 있을 수 없다.
     // 또, 빨간 구슬과 파란 구슬의 크기는 한 칸을 모두 차지한다. 기울이는 동작을 그만하는 것은 더 이상 구슬이 움직이지 않을 때 까지이다.
     //보드의 상태가 주어졌을 때, 최소 몇 번 만에 빨간 구슬을 구멍을 통해 빼낼 수 있는지 구하는 프로그램을 작성하시오.
+    public static void main(String[] args) {
+        float B = 2;
+        float F = 5;
+        float E = 7;
+        float D = 9;
+        float A = 3;
+        float C = 1;
+        float s = 1000000;
+        int x = (int) s;
+        double z = (B*F - E*D) / (A*D) - (B*C);
+        x = (int)z;
+        System.out.println(z);
+    }
 }
