@@ -17,11 +17,18 @@ public class 숨바꼭질4 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        StringBuffer sb = new StringBuffer();
+
         int start = Integer.parseInt(st.nextToken());
         int end = Integer.parseInt(st.nextToken());
+        if (start > end) {
+            System.out.println(start - end);
+            for (int i = start; i >= end; i--) {
+                System.out.print(i + " ");
+            }
+            return;
+        }
 
-        int arr[][] = new int[100001][2]; // 0번에 몇 번 거쳤는지. 1번에 어디를 거쳤는 지
+        int arr[][] = new int[100001][2];
         Queue<Integer> q = new LinkedList<>();
         //----------------------------- 세팅-----------------
         q.add(start);
@@ -46,32 +53,14 @@ public class 숨바꼭질4 {
             }
         }
         // ------------------------------- bfs -------------
-        if (start > end) {
-            System.out.println(arr[end][0]);
-            int next = end;
-            String result = "" + next;
-            while (true) {
-                if (next == start)
-                    break;
-                next = arr[next][1];
-                result = next + " " + result;
-            }
-            System.out.println(result);
-        }else{
-            for (int i = end; i >=start; i--){
-                sb.append(i + " ");
-            }
-        }
-        System.out.println(sb.toString());
-    }
 
-    static class Node {
-        String route;
-        int cost;
-
-        public Node(String route, int cost) {
-            this.route = route;
-            this.cost = cost;
+        System.out.println(arr[end][0]);
+        int next = end;
+        String result = "" + next;
+        while (next != start) {
+            next = arr[next][1];
+            result = next + " " + result;
         }
+        System.out.println(result);
     }
 }
