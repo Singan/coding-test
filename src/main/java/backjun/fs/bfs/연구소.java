@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 public class 연구소 {
     //https://www.acmicpc.net/problem/14502
     static int[][] arr;
-    static int[][] move = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    static int[][] move = {{0, 1}, {0, -1}, {-1, 0} , {1, 0}};
     static boolean[][] visit;
     static int N, M;
     static int result = Integer.MIN_VALUE;
@@ -23,7 +23,6 @@ public class 연구소 {
         M = Integer.parseInt(st.nextToken());
 
         arr = new int[N][M];
-        visit = new boolean[N][M];
 
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
@@ -32,7 +31,7 @@ public class 연구소 {
             }
         }
         dfs(0);
-
+        System.out.println(result);
     }
 
     public static void dfs(int depth) {
@@ -40,7 +39,7 @@ public class 연구소 {
             bfs();
             return;
         }
-        for (int i = 0; i < M; i++) {
+        for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
                 if (arr[i][j] == 0) {
                     arr[i][j] = 1;
@@ -72,6 +71,8 @@ public class 연구소 {
                 int y = curY + m[1];
                 if (x < N && y < M && x >= 0 && y >= 0 && virusMap[x][y] == 0) {
                     virusMap[x][y] = 2;
+                    queue.add(new int[]{x, y});
+
                 }
             }
 
