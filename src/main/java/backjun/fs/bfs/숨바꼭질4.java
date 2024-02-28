@@ -26,6 +26,9 @@ public class 숨바꼭질4 {
                 System.out.print(i + " ");
             }
             return;
+        }else if(start == end){
+            System.out.println(0);
+            System.out.println(end);
         }
 
         int arr[][] = new int[100001][2];

@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+import static java.lang.Math.min;
+
 public class 라면사기 {
     //라면매니아 교준이네 집 주변에는 N개의 라면 공장이 있다.
     // 각 공장은 1번부터 N번까지 차례대로 번호가 부여되어 있다. 교준이는 i번 공장에서 정확하게 Ai개의 라면을 구매하고자 한다(1 ≤ i ≤ N).
@@ -52,7 +54,7 @@ public class 라면사기 {
         if (i+idx >= n || idx >= value.length || factory[i + idx] == 0)
             return 0;
 
-        count = Math.min(factory[i + idx], count);
+        count = min(factory[i + idx], count);
         System.out.println(i +"  : " + count);
         factory[i + idx] = factory[i + idx] - count;
         int money = count * value[idx];
