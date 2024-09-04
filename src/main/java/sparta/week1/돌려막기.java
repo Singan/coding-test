@@ -30,7 +30,7 @@ public class 돌려막기 {
             }
         }
         // x 번 째 사람의 y 번째 예상 일량 = jobs[i][j] * times[j][y]
-
+        // x 번 사람의 y 번 일에 대해 나머지 사람의 예상 소요시간이 들어가야 한다.
         int[] arr = new int[5];
         int min = Integer.MAX_VALUE;
         int minIndex = 0;
