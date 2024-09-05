@@ -1,4 +1,4 @@
-package sparta.week1;
+package sparta.day1;
 //https://www.acmicpc.net/problem/2018
 
 import java.io.IOException;

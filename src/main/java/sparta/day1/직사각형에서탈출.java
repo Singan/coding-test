@@ -1,4 +1,4 @@
-package sparta.week1;
+package sparta.day1;
 
 import java.io.*;
 import java.util.StringTokenizer;
