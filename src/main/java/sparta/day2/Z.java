@@ -52,13 +52,6 @@ public class Z {
                 start = start * 3;
             }
         }
-
-
-
-
-
         return start + deep(centerPoint, r, c);
-
-
     }
 }
