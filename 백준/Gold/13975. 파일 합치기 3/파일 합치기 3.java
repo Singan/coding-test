@@ -25,13 +25,14 @@ public class Main {
             }
 
             long result = 0; // k 는 최소 3이다.
-            while (!queue.isEmpty()){
-                if(queue.size() <= 1)
-                    break;
+            while (true){
+
                 long next = queue.poll() + queue.poll();
 
-                queue.add(next);
                 result+= next;
+                if(queue.isEmpty())
+                    break;
+                queue.add(next);
             }
 
             System.out.println(result);
