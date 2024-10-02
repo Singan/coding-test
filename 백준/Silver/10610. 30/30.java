@@ -12,8 +12,9 @@ public class Main {
         for (int i = 0; i < str.length(); i++) {
             n += str.charAt(i) - '0';
         }
-        Arrays.sort(chars);
         if (zero != -1 && n % 3 == 0) {
+            Arrays.sort(chars);
+
             for (int i = chars.length-1; i >=0; i--) {
                 System.out.print(chars[i]);
             }
