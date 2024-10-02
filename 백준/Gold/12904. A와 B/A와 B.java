@@ -6,7 +6,8 @@
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
+// A = 맨 뒤에 추가
+// B = 뒤집고 맨 뒤에 추가
 public class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
