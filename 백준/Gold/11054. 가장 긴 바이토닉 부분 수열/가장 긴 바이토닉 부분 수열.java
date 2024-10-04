@@ -1,49 +1,49 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+import java.util.Arrays;
 
-//특정 수를 기준으로 왼쪽에 위치한 숫자는 증가하고
-// 오른쪽에 위치한 숫자는 감소하는 형태를 띤 부분 수열을 의미한다.
-//https://www.acmicpc.net/problem/11054
 public class Main {
     public static void main(String[] args) throws Exception {
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
-        String[] str = br.readLine().split(" ");
+        int[] arr = new int[n];
 
-        int left[] = new int[n];
-        int right[] = new int[n];
-        left[0] = 1;
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < n; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        // 왼쪽에서 오른쪽으로 진행하는 증가하는 부분 수열의 길이
+        int[] left = new int[n];
+        int[] right = new int[n];
+        Arrays.fill(left, 1);
+        Arrays.fill(right, 1);
+
+        // 증가하는 수열 구하기 (left[])
         for (int i = 1; i < n; i++) {
-            left[i] = 1;
-            int cur = Integer.parseInt(str[i]);
-            for (int j = i - 1; j >= 0; j--) {
-                int prev = Integer.parseInt(str[j]);
-                if (prev < cur) { // 이전 값보다 크다면 해당 수열에 들어갈 수 있다. ( 증가하는 수열 )
+            for (int j = 0; j < i; j++) {
+                if (arr[i] > arr[j]) {
                     left[i] = Math.max(left[i], left[j] + 1);
                 }
             }
         }
 
-        right[n - 1] = 1;
-        for (int i = n - 2; i >= 0; i--) { // 헷갈리니 역순으로 진행
-            right[i] = 1;
-            int cur = Integer.parseInt(str[i]);
-            for (int j = i; j < n; j++) {
-                int next = Integer.parseInt(str[j]);
-                if (cur > next) {
+        // 감소하는 수열 구하기 (right[]) - 역방향 진행
+        for (int i = n - 2; i >= 0; i--) {
+            for (int j = n - 1; j > i; j--) {
+                if (arr[i] > arr[j]) {
                     right[i] = Math.max(right[i], right[j] + 1);
                 }
             }
         }
-        // dp 배열 중에서 가장 큰 값 찾기
 
-
+        // 가장 긴 바이토닉 수열의 길이 계산
         int maxLength = 0;
         for (int i = 0; i < n; i++) {
             maxLength = Math.max(maxLength, left[i] + right[i] - 1);
         }
-        System.out.println(maxLength);
 
+        System.out.println(maxLength);
     }
 }
