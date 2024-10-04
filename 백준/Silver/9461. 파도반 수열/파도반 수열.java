@@ -1,28 +1,33 @@
-import java.util.Scanner;
+import java.io.*;
 
-// 점화식 f(n) = f(n-1) + f(n-5)
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+/*
+ * 점화식 : p(n) = p(n-2) + p(n-3)
+ * dp배열 long으로 해주어야 함.
+ */
+class Main {
+	static long[] dp = new long[101];
 
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int T = Integer.parseInt(br.readLine());
 
-        int T = sc.nextInt();
-        for (int i = 0; i < T; i++) {
-            int n = sc.nextInt();
-            long arr[] = new long[Math.max(n, 4)];
-            arr[0] = 1;
-            arr[1] = 1;
-            arr[2] = 1;
-            arr[3] = 2;
-            if (n <= 3) {
-                System.out.println(arr[n-1]);
-                continue;
-            }
-            for (int j = 4; j < n; j++) {
-                arr[j] = arr[j - 2] + arr[j - 3];
-            }
-            System.out.println(arr[n - 1]);
-        }
+		initializeDP();
 
-    }
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < T; i++) {
+			sb.append(dp[Integer.parseInt(br.readLine())]).append("\n");
+		}
+
+		System.out.println(sb);
+	}
+
+	static void initializeDP() {
+		dp[1] = 1;
+		dp[2] = 1;
+		dp[3] = 1;
+
+		for (int i = 4; i < 101; i++) {
+			dp[i] = dp[i - 2] + dp[i - 3];
+		}
+	}
 }
