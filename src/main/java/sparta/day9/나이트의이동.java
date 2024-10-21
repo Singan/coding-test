@@ -39,8 +39,11 @@ public class 나이트의이동 {
             arrive = new int[]{Integer.parseInt(str[0]), Integer.parseInt(str[1])};
 
             if (arrive[0] != start[0] || arrive[1] != start[1]) {
-                sb.append(bfs(start[0], start[1])).append("\n");
+                sb.append(bfs(start[0], start[1]));
+            } else {
+                sb.append(0);
             }
+            sb.append("\n");
         }
         System.out.println(sb);
 
@@ -50,21 +53,21 @@ public class 나이트의이동 {
         Queue<int[]> queue = new LinkedList<>();
         int moveCount = 0;
         queue.add(new int[]{i, j, moveCount});
+        visit[i][j] = true;
+
         while (!queue.isEmpty()) {
             int[] cur = queue.poll();
             moveCount = cur[2];
-            visit[cur[0]][cur[1]] = true;
-            if (cur[0] == arrive[0] && cur[1] == arrive[1]) {
-                System.out.println("안오나?");
-                return moveCount;
 
+            if (visit[arrive[0]][arrive[1]]) {
+                return moveCount;
             }
             for (int m[] : move) {
                 int x = cur[0] + m[0];
                 int y = cur[1] + m[1];
                 if (chk(x, y)) {
-                    queue.add(new int[]{x, y , moveCount+1});
-
+                    queue.add(new int[]{x, y, moveCount++});
+                    visit[x][y] = true;
                 }
             }
         }
@@ -73,10 +76,9 @@ public class 나이트의이동 {
 
 
     static boolean chk(int x, int y) {
-        if (x >= 0 && y >= 0 && x < visit.length && y < visit[x].length){
+        if (x >= 0 && y >= 0 && x < visit.length && y < visit[x].length && !visit[x][y]) {
             return true;
         }
         return false;
     }
-
 }
