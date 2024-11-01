@@ -31,9 +31,12 @@ public class Main {
         }
         bfs(visited, graph, visitOrder, R);
 
+        StringBuilder sb = new StringBuilder();
         for (int i = 1; i <= N; i++) {
-            System.out.println(visitOrder[i]);
+            sb.append(visitOrder[i]).append("\n");
         }
+
+        System.out.println(sb.toString());
     }
 
     static void bfs(boolean[] visited, List<List<Integer>> graph, int[] visitOrder, int start) {
