@@ -21,17 +21,20 @@ public class Main {
         long right = lans[lans.length - 1];
         long result = 1;
         while (left <= right) {
-            long mid = left + (right - left) / 2;
+            long mid = (right + left) / 2;
             int count = 0;
             for (int i = 0; i < k; i++) {
                 count += lans[i] / mid;
             }
-            if (count >= n) {
+            if (count >= n)
                 result = mid;
-                left = mid + 1;
-            }else{
+
+            if (count < n) {
                 right = mid - 1;
+            } else {
+                left = mid + 1;
             }
+
         }
 
         System.out.println(result);
