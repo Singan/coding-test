@@ -1,32 +1,27 @@
 import java.util.*;
 
 class Solution {
- public int solution(int[] stones, int k) {
-        // Deque를 사용하여 슬라이딩 윈도우에서 최댓값을 추적
-        Deque<Integer> deque = new LinkedList<>();
+    public int solution(int[] stones, int k) {
         int answer = Integer.MAX_VALUE;
+        Deque<Integer> deque = new LinkedList<>();
 
         for (int i = 0; i < stones.length; i++) {
-            // 이전 값들이 현재 윈도우에 포함되지 않으면 제거
-            if (!deque.isEmpty() && deque.peekFirst() <= i - k) {
-                deque.pollFirst();
-            }
-
-            // 현재 값은 현재 윈도우 내에서 최댓값을 유지해야 하므로
-            // 덱의 뒤에서부터 값을 제거
+            // 덱 끝에서 현재 값보다 작은 애들은 제거 (필요 없는 값)
             while (!deque.isEmpty() && stones[deque.peekLast()] <= stones[i]) {
                 deque.pollLast();
             }
+            deque.offer(i);  // 현재 인덱스를 덱에 추가
 
-            // 현재 인덱스를 덱에 추가
-            deque.offerLast(i);
+            // 슬라이딩 윈도우 범위를 벗어난 값은 제거
+            if (deque.peekFirst() <= i - k) {
+                deque.pollFirst();
+            }
 
-            // 윈도우 크기 k가 되면, 최소 최댓값을 구한다.
+            // k 개 이상의 윈도우가 만들어졌을 때, 최댓값을 정답 후보로 저장
             if (i >= k - 1) {
                 answer = Math.min(answer, stones[deque.peekFirst()]);
             }
         }
-
         return answer;
     }
 }
