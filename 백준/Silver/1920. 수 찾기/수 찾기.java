@@ -1,7 +1,8 @@
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -12,45 +13,28 @@ public class Main {
         int n = Integer.parseInt(st.nextToken());
         st = new StringTokenizer(br.readLine());
 
-        int arr[] = new int[n];
+        // HashSet을 사용하여 A 배열의 값을 저장합니다.
+        HashSet<Integer> set = new HashSet<>();
         for (int i = 0; i < n; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
+            set.add(Integer.parseInt(st.nextToken()));
         }
+
         st = new StringTokenizer(br.readLine());
         int m = Integer.parseInt(st.nextToken());
 
-
         st = new StringTokenizer(br.readLine());
-        int search[] = new int[m];
-        for (int i = 0; i < m; i++) {
-            search[i] = Integer.parseInt(st.nextToken());
-        }
-
-        Arrays.sort(arr);
-
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < m; i++) {
-            int start = 0, end = n - 1;
-            int answer = 0;
-            while (start <= end) {
-                int mid = (start + end) / 2;
-                int searchValue = search[i];
-
-                int value = arr[mid];
-                if (searchValue == value) {
-                    answer = 1;
-                    break;
-                }
-
-                if (value < searchValue) {
-                    start = mid + 1;  // start 값을 mid + 1로 갱신
-                } else {
-                    end = mid - 1;  // end 값을 mid - 1로 갱신
-                }
-
+            int searchValue = Integer.parseInt(st.nextToken());
+            // HashSet에서 값을 검색하여 존재 여부를 출력합니다.
+            if (set.contains(searchValue)) {
+                sb.append("1\n");
+            } else {
+                sb.append("0\n");
             }
-            sb.append(answer).append("\n");
         }
-        System.out.println(sb.toString());
+
+        // 결과를 출력합니다.
+        System.out.print(sb.toString());
     }
 }
