@@ -1,46 +1,52 @@
-import java.util.Scanner;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        
+
+    static int board[][]; // 2D 배열
+    static int dp[][]; // DP 배열
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine()); // 크기 N
+
+        board = new int[n + 1][n + 1]; // 2D 배열 초기화
+        dp = new int[n + 1][n + 1]; // DP 배열 초기화
+
         // 입력 받기
-        int N = sc.nextInt();
-        int[][] List = new int[N][N];
-        int[][] temp = new int[N][N];
-        
-        // 2D 배열 List와 temp 초기화
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                List[i][j] = sc.nextInt();
-                temp[i][j] = 1;  // 기본값은 1로 설정
+        for (int i = 1; i <= n; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            for (int j = 1; j <= n; j++) {
+                board[i][j] = Integer.parseInt(st.nextToken());
             }
         }
+
+        // DP를 사용하여 최장 증가 부분 수열 구하기
+        int maxLength = 1;  // 최장 증가 부분 수열의 길이 (최소 1)
         
-        // LIS 계산을 위한 DP 처리
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                for (int k = 0; k <= i; k++) {
-                    for (int l = 0; l <= j; l++) {
-                        if (List[k][l] < List[i][j]) {
-                            temp[i][j] = Math.max(temp[i][j], temp[k][l] + 1);
+        // DP 배열 계산
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                dp[i][j] = 1; // 초기값은 1로 설정
+                
+                // (i, j)보다 작은 값이 있는 위치를 찾아서 LIS 길이 갱신
+                for (int k = 1; k <= i; k++) {
+                    for (int l = 1; l <= j; l++) {
+                        if (board[k][l] < board[i][j]) {
+                            dp[i][j] = Math.max(dp[i][j], dp[k][l] + 1);
                         }
                     }
                 }
+
+                // 최장 LIS 길이 계산
+                maxLength = Math.max(maxLength, dp[i][j]);
             }
         }
 
-        // 최장 증가 부분 수열(LIS) 길이 계산
-        int ans = 0;
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                ans = Math.max(ans, temp[i][j]);
-            }
-        }
-        
-        // 결과 출력
-        System.out.println(ans);
-        
-        sc.close();
+        // 최종 결과 출력
+        System.out.println(maxLength);
     }
 }
