@@ -1,7 +1,10 @@
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.StringTokenizer;
 import java.util.*;
 
 public class Main {
@@ -12,40 +15,25 @@ public class Main {
         int n = Integer.parseInt(st.nextToken());
         int myCard[] = new int[n];
         st = new StringTokenizer(br.readLine());
+        Set<Integer> set = new HashSet<>();
         for (int i = 0; i < n; i++) {
             myCard[i] = Integer.parseInt(st.nextToken());
+            set.add(myCard[i]);
         }
-
-        Arrays.sort(myCard);
         st = new StringTokenizer(br.readLine());
         int m = Integer.parseInt(st.nextToken());
         int cardArr[] = new int[m];
         int answer[] = new int[m];
         st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < m; i++) {
-            cardArr[i] = Integer.parseInt(st.nextToken());
-        }
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < m; i++) {
-            int targetCard = cardArr[i];
-            int start = 0;
-            int end = n - 1;
-            while (start <= end) {
-                int mid = (start + end) / 2;
-                if (targetCard == myCard[mid]) {
-                    answer[i] = 1;
-                    break;
-                }
-                if (myCard[mid] < targetCard){
-                    start = mid + 1;
-                } else {
-
-                    end = mid - 1;
-                }
-            }
+            cardArr[i] = Integer.parseInt(st.nextToken());
+            answer[i] = set.contains(cardArr[i]) ? 1 : 0;
             sb.append(answer[i] + " ");
         }
+
         System.out.println(sb.toString());
+
     }
 }
