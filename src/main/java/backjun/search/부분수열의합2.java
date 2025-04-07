@@ -11,12 +11,15 @@ public class 부분수열의합2 {
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         int n = Integer.parseInt(st.nextToken());
-        int s = Integer.parseInt(st.nextToken());
+        int target = Integer.parseInt(st.nextToken());
 
         st = new StringTokenizer(br.readLine());
         int numbers[] = new int[n];
         for (int i = 0; i < n; i++) {
             numbers[i] = Integer.parseInt(st.nextToken());
         }
+
+
+
     }
 }
