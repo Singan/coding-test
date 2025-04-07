@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,8 +16,7 @@ public class Main {
         }
         int question = Integer.parseInt(br.readLine());
 
-        int dp[][] = new int[n + 1][n + 1];
-
+boolean dp[][] = new boolean[n + 1][n + 1];
         for (int len = 1; len <= n; len++) {
             for (int i = 1; i <= n; i++) {
 
@@ -27,12 +25,12 @@ public class Main {
                 if (j > n)
                     continue;
                 if (len == 1) {
-                    dp[i][j] = 1;
+                    dp[i][j] = true;
                     continue;
                 }
                 if (arr[i] == arr[j]) {
                     if (len == 2) {
-                        dp[i][j] = 1;
+                        dp[i][j] = true;
                     } else {
                         dp[i][j] = dp[i + 1][j - 1];
                     }
@@ -45,7 +43,7 @@ public class Main {
             st = new StringTokenizer(br.readLine());
             int start = Integer.parseInt(st.nextToken());
             int end = Integer.parseInt(st.nextToken());
-            sb.append(dp[start][end]).append("\n");
+            sb.append(dp[start][end] ? 1 : 0).append("\n");
             question--;
         }
         System.out.println(sb);
