@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -38,7 +37,6 @@ public class Main {
         H = Integer.parseInt(st.nextToken()); // 높이(층)
 
         box = new int[H][N][M];
-        visited = new boolean[H][N][M];
         Queue<int[]> queue = new ArrayDeque<>();
         // 입력 받기 (z -> y -> x)
         for (int h = 0; h < H; h++) {
@@ -48,7 +46,6 @@ public class Main {
                     box[h][n][m] = Integer.parseInt(st.nextToken());
                     if (box[h][n][m] == 1) {
                         queue.add(new int[]{h, n, m});
-                        visited[h][n][m] = true;
                     }
 
                 }
@@ -69,12 +66,10 @@ public class Main {
                 int n = boxLocation[1] + direction[1];
                 int m = boxLocation[2] + direction[2];
 
-                if (h >= 0 && n >= 0 && m >= 0 && h < H && m < M && n < N && !visited[h][n][m] && box[h][n][m] != -1) {
-                    if (box[prevh][prevn][prevm] + 1 < box[h][n][m] || box[h][n][m] == 0) {
-                        box[h][n][m] = box[prevh][prevn][prevm] + 1;
-                        visited[h][n][m] = true;
-                        queue.add(new int[]{h,n,m});
-                    }
+                if (h >= 0 && n >= 0 && m >= 0 && h < H && n < N && m < M
+                        && box[h][n][m] == 0) {  // 0인 곳만 방문 가능
+                    box[h][n][m] = box[prevh][prevn][prevm] + 1;
+                    queue.add(new int[]{h, n, m});
                 }
             }
         }
